@@ -1,0 +1,33 @@
+generated: '2026-07-20'
+method: derived
+status: candidate
+source: openapi/australian-military-bank-cds-banking-products-openapi.yml
+description: >-
+  Candidate MCP tool surface derived from the public, unauthenticated CDR
+  Product Reference Data endpoints. Australian Military Bank publishes no
+  official hosted MCP server; these tools map 1:1 to the two live public
+  operations. Consumer-data operations are excluded (they require CDR
+  accreditation and cannot be exposed as an open MCP surface).
+server:
+  name: australian-military-bank-cdr-products
+  transport: http
+  url: null
+tools:
+  - name: list_banking_products
+    description: >-
+      List Australian Military Bank retail banking products (filterable by
+      product-category, effective date; paginated). Requires x-v: 3.
+    source_operation: openapi/australian-military-bank-cds-banking-products-openapi.yml#listBankingProducts
+    http:
+      method: GET
+      path: /banking/products
+      base_url: https://public.open.australianmilitarybank.com.au/cds-au/v1
+  - name: get_banking_product_detail
+    description: >-
+      Retrieve the full detail (features, constraints, eligibility, fees,
+      deposit/lending rates) for a single product by productId. Requires x-v: 3.
+    source_operation: openapi/australian-military-bank-cds-banking-products-openapi.yml#getBankingProductDetail
+    http:
+      method: GET
+      path: /banking/products/{productId}
+      base_url: https://public.open.australianmilitarybank.com.au/cds-au/v1

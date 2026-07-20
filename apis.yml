@@ -52,6 +52,8 @@ apis:
     Standards Banking API; provides GET /banking/products (list, filterable/paginated)
     and GET /banking/products/{productId} (product detail) with no authentication.
 common:
+- type: DomainSecurity
+  url: security/australian-military-bank-domain-security.yml
 - type: Website
   url: https://www.australianmilitarybank.com.au/
 - type: DeveloperPortal
@@ -66,6 +68,32 @@ common:
   url: https://www.australianmilitarybank.com.au/securityhub
 - type: Support
   url: https://www.australianmilitarybank.com.au/contact
+- type: APIReference
+  url: https://consumerdatastandardsaustralia.github.io/standards/#get-products
+- type: Authentication
+  url: authentication/australian-military-bank-authentication.yml
+- type: Conventions
+  url: conventions/australian-military-bank-conventions.yml
+- type: ErrorCatalog
+  url: errors/australian-military-bank-problem-types.yml
+- type: Conformance
+  url: conformance/australian-military-bank-conformance.yml
+- type: Compliance
+  url: https://www.australianmilitarybank.com.au/consumer-data-right
+- type: Lifecycle
+  url: lifecycle/australian-military-bank-lifecycle.yml
+- type: Deprecation
+  url: lifecycle/australian-military-bank-lifecycle.yml
+- type: DataModel
+  url: data-model/australian-military-bank-data-model.yml
+- type: MCPServer
+  url: mcp/australian-military-bank-mcp.yml
+- type: LLMsTxt
+  url: llms/australian-military-bank-llms.txt
+- type: Overlay
+  url: overlays/australian-military-bank-cds-banking-products-overlay.yaml
+- type: AgentSkill
+  url: skills/_index.yml
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com

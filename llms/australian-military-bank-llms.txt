@@ -1,0 +1,30 @@
+# Australian Military Bank
+
+> Australian Military Bank Ltd (ABN 48 087 649 741, AFSL/Australian Credit Licence 237988, BSB 642170) is a customer-owned mutual authorised deposit-taking institution (ADI) serving the Australian Defence Force community since 1959. As a CDR data holder its only public, unauthenticated API is the mandated Consumer Data Right (CDR) Product Reference Data (PRD) API, built to the Data Standards Body (DSB) Consumer Data Standards. Consumer data sharing (accounts, balances, transactions) is available only to CDR-accredited data recipients over authenticated, FAPI-profiled OAuth2/OIDC flows.
+
+## APIs
+
+- [CDR Product Reference Data API](https://www.australianmilitarybank.com.au/consumer-data-right): Public, unauthenticated product catalogue. Base URL https://public.open.australianmilitarybank.com.au/cds-au/v1 — GET /banking/products and GET /banking/products/{productId}. Send header x-v: 3.
+
+## Specs
+
+- [OpenAPI (CDR Banking / DSB)](https://raw.githubusercontent.com/api-evangelist/australian-military-bank/refs/heads/main/openapi/australian-military-bank-cds-banking-products-openapi.yml)
+- [CDR Banking API reference](https://consumerdatastandardsaustralia.github.io/standards/#get-products)
+
+## Artifacts
+
+- [Authentication profile](https://raw.githubusercontent.com/api-evangelist/australian-military-bank/refs/heads/main/authentication/australian-military-bank-authentication.yml)
+- [API conventions (versioning, pagination, tracing, errors)](https://raw.githubusercontent.com/api-evangelist/australian-military-bank/refs/heads/main/conventions/australian-military-bank-conventions.yml)
+- [Error catalog](https://raw.githubusercontent.com/api-evangelist/australian-military-bank/refs/heads/main/errors/australian-military-bank-problem-types.yml)
+- [Conformance (CDR/FAPI/OAuth2/OIDC)](https://raw.githubusercontent.com/api-evangelist/australian-military-bank/refs/heads/main/conformance/australian-military-bank-conformance.yml)
+- [Lifecycle & versioning](https://raw.githubusercontent.com/api-evangelist/australian-military-bank/refs/heads/main/lifecycle/australian-military-bank-lifecycle.yml)
+- [Data model](https://raw.githubusercontent.com/api-evangelist/australian-military-bank/refs/heads/main/data-model/australian-military-bank-data-model.yml)
+- [Domain security probe](https://raw.githubusercontent.com/api-evangelist/australian-military-bank/refs/heads/main/security/australian-military-bank-domain-security.yml)
+- [Candidate MCP tools](https://raw.githubusercontent.com/api-evangelist/australian-military-bank/refs/heads/main/mcp/australian-military-bank-mcp.yml)
+
+## Docs
+
+- [Consumer Data Right at Australian Military Bank](https://www.australianmilitarybank.com.au/consumer-data-right)
+- [Security hub](https://www.australianmilitarybank.com.au/securityhub)
+- [Privacy policy](https://www.australianmilitarybank.com.au/privacy)
+- [Disclosure documents / terms](https://www.australianmilitarybank.com.au/disclosuredocuments)

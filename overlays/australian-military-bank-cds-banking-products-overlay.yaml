@@ -1,0 +1,26 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Australian Military Bank CDR PRD
+  version: 1.0.0
+extends: openapi/australian-military-bank-cds-banking-products-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: australian-military-bank
+      x-apievangelist-public-surface: >-
+        Only GET /banking/products and GET /banking/products/{productId} are
+        exposed on the public host; all other paths require CDR accreditation.
+      x-apievangelist-verified: >-
+        Live 200 at https://public.open.australianmilitarybank.com.au/cds-au/v1/banking/products (x-v 3)
+  - target: $.servers
+    update:
+      - description: Public Product Reference Data (unauthenticated)
+        url: https://public.open.australianmilitarybank.com.au/cds-au/v1
+  - target: $.paths['/banking/products'].get
+    update:
+      x-apievangelist-access: public
+      x-apievangelist-required-headers: [x-v]
+  - target: $.paths['/banking/products/{productId}'].get
+    update:
+      x-apievangelist-access: public
+      x-apievangelist-required-headers: [x-v]

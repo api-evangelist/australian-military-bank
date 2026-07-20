@@ -1,0 +1,103 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/australian-military-bank-cds-banking-products-openapi.yml
+description: >-
+  Entity-relationship model for the public CDR Product Reference Data surface,
+  derived from the OpenAPI component schemas. Rooted at the banking Product,
+  with the rich detail sub-objects returned by GET /banking/products/{productId}.
+entities:
+  - name: BankingProduct
+    schema: BankingProductV6
+    id: productId
+    id_ref: BankingProductId
+    key_fields:
+      - productCategory (BankingProductCategoryV2)
+      - name
+      - description
+      - brand
+      - isTailored
+      - effectiveFrom
+      - effectiveTo
+    returned_by:
+      - listBankingProducts
+      - getBankingProductDetail
+  - name: BankingProductDetail
+    schema: BankingProductDetailV7
+    extends: BankingProduct
+    returned_by:
+      - getBankingProductDetail
+  - name: BankingProductFeature
+    schema: BankingProductFeatureV4
+  - name: BankingProductConstraint
+    schema: BankingProductConstraintV3
+  - name: BankingProductEligibility
+    schema: BankingProductEligibilityV2
+  - name: BankingProductFee
+    schema: BankingProductFeeV2
+  - name: BankingProductDiscount
+    schema: BankingProductDiscountV2
+  - name: BankingProductDepositRate
+    schema: BankingProductDepositRateV2
+  - name: BankingProductLendingRate
+    schema: BankingProductLendingRateV3
+  - name: BankingProductRateTier
+    schema: BankingProductRateTierV4
+  - name: BankingProductBundle
+    schema: BankingProductBundle
+  - name: BankingProductCardArt
+    schema: BankingProductCardArt
+  - name: BankingProductAdditionalInformation
+    schema: BankingProductAdditionalInformationV2
+relationships:
+  - from: BankingProductDetail
+    to: BankingProductFeature
+    type: has_many
+    via: features
+  - from: BankingProductDetail
+    to: BankingProductConstraint
+    type: has_many
+    via: constraints
+  - from: BankingProductDetail
+    to: BankingProductEligibility
+    type: has_many
+    via: eligibility
+  - from: BankingProductDetail
+    to: BankingProductFee
+    type: has_many
+    via: fees
+  - from: BankingProductFee
+    to: BankingProductDiscount
+    type: has_many
+    via: discounts
+  - from: BankingProductDetail
+    to: BankingProductDepositRate
+    type: has_many
+    via: depositRates
+  - from: BankingProductDetail
+    to: BankingProductLendingRate
+    type: has_many
+    via: lendingRates
+  - from: BankingProductDepositRate
+    to: BankingProductRateTier
+    type: has_many
+    via: tiers
+  - from: BankingProductLendingRate
+    to: BankingProductRateTier
+    type: has_many
+    via: tiers
+  - from: BankingProductDetail
+    to: BankingProductBundle
+    type: has_many
+    via: bundles
+  - from: BankingProduct
+    to: BankingProductCardArt
+    type: has_many
+    via: cardArt
+  - from: BankingProductDetail
+    to: BankingProductAdditionalInformation
+    type: has_one
+    via: additionalInformation
+id_prefixes:
+  productId: >-
+    ASCII string uniquely identifying the product within the data holder
+    (BankingProductId); opaque, not globally namespaced.

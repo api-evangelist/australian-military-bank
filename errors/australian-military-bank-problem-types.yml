@@ -1,0 +1,56 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/australian-military-bank-cds-banking-products-openapi.yml
+docs: https://consumerdatastandardsaustralia.github.io/standards/#error-codes
+format: cds-response-error-list
+envelope:
+  schema: ResponseErrorListV2
+  wrapper: '{ "errors": [ { code, title, detail, meta } ] }'
+  note: >-
+    DSB Consumer Data Standards error format (not RFC 9457). code is a CDR
+    error URN; title is a stable human-readable summary; detail is
+    occurrence-specific; meta may carry an application-specific URN extension.
+problems:
+  - status: 400
+    schema: ResponseErrorListV2
+    title: Bad Request
+    description: >-
+      Invalid field, invalid page/page-size, or malformed request parameter.
+    cds_error_codes:
+      - urn:au-cds:error:cds-all:Field/Invalid
+      - urn:au-cds:error:cds-all:Field/Missing
+      - urn:au-cds:error:cds-all:Field/InvalidPageSize
+    source_operations:
+      - openapi/australian-military-bank-cds-banking-products-openapi.yml#listBankingProducts
+      - openapi/australian-military-bank-cds-banking-products-openapi.yml#getBankingProductDetail
+  - status: 404
+    schema: ResponseErrorListV2
+    title: Not Found
+    description: Requested product (productId) does not exist or is not available.
+    cds_error_codes:
+      - urn:au-cds:error:cds-all:Resource/NotFound
+      - urn:au-cds:error:cds-banking:Authorisation/UnavailableBankingAccount
+    source_operations:
+      - openapi/australian-military-bank-cds-banking-products-openapi.yml#getBankingProductDetail
+  - status: 406
+    schema: ResponseErrorListV2
+    title: Not Acceptable
+    description: >-
+      Unsupported or missing x-v version negotiation header, or an Accept type
+      that cannot be satisfied.
+    cds_error_codes:
+      - urn:au-cds:error:cds-all:Header/InvalidVersion
+      - urn:au-cds:error:cds-all:Header/UnsupportedVersion
+      - urn:au-cds:error:cds-all:Header/Missing
+    source_operations:
+      - openapi/australian-military-bank-cds-banking-products-openapi.yml#listBankingProducts
+      - openapi/australian-military-bank-cds-banking-products-openapi.yml#getBankingProductDetail
+  - status: 422
+    schema: ResponseErrorListV2
+    title: Unprocessable Entity
+    description: >-
+      Request was well-formed but a field value failed a semantic/business rule.
+    cds_error_codes:
+      - urn:au-cds:error:cds-all:Field/Invalid
+    source_operations:
+      - openapi/australian-military-bank-cds-banking-products-openapi.yml#listBankingProducts

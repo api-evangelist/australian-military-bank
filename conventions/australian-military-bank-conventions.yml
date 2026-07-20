@@ -1,0 +1,71 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/australian-military-bank-cds-banking-products-openapi.yml
+docs: https://consumerdatastandardsaustralia.github.io/standards/#http-headers
+description: >-
+  Cross-cutting request/response conventions for Australian Military Bank's CDR
+  Product Reference Data API, as mandated by the DSB Consumer Data Standards.
+  Derived from the OpenAPI and confirmed against live responses from
+  https://public.open.australianmilitarybank.com.au/cds-au/v1/banking/products.
+authentication:
+  public_prd: none
+  cross_ref: authentication/australian-military-bank-authentication.yml
+versioning:
+  style: header-negotiated
+  request_header: x-v
+  min_request_header: x-min-v
+  response_header: x-v
+  current_products_version: 3
+  detail: >-
+    Endpoint versions are negotiated per request via the x-v header (the
+    highest version the client supports); x-min-v optionally sets the lowest
+    acceptable version. The response echoes the served version in x-v. A live
+    products call returns x-v: 3.
+pagination:
+  style: page-number
+  request_params:
+    - page
+    - page-size
+  response_fields:
+    - meta.totalRecords
+    - meta.totalPages
+    - links.self
+    - links.first
+    - links.prev
+    - links.next
+    - links.last
+  detail: >-
+    List endpoints use 1-based page numbers with page-size (default 25). The
+    meta object carries totalRecords/totalPages and the links object carries
+    RFC-style first/prev/next/last cursors.
+request_tracing:
+  header: x-fapi-interaction-id
+  behavior: >-
+    Clients MAY send x-fapi-interaction-id as an RFC 4122 UUID; the server
+    echoes it (or generates one) in the response for end-to-end correlation.
+    Also used on authenticated flows are x-fapi-auth-date and
+    x-fapi-customer-ip-address.
+error_envelope:
+  shape: cds-response-error-list
+  schema: ResponseErrorListV2
+  fields: [code, title, detail, meta]
+  format: cdr-standard
+  cross_ref: errors/australian-military-bank-problem-types.yml
+  detail: >-
+    Errors are returned as { "errors": [ { code, title, detail, meta } ] }.
+    code is a CDR error URN (urn:au-cds:error:...). This is the DSB Consumer
+    Data Standards error format, not RFC 9457 problem+json.
+idempotency:
+  supported: false
+  reason: >-
+    The public surface is read-only (GET only), so no idempotency-key contract
+    applies. Write operations do not exist in the CDR data-holder read APIs.
+rate_limiting:
+  documented: >-
+    Traffic thresholds for CDR data holders are set by the CDR Register /
+    Data Standards (non-functional requirements); no per-response rate-limit
+    headers are advertised on the public PRD endpoints.
+cors:
+  access_control_allow_origin: '*'
+  exposed_headers: [Content-Length, x-v, x-min-v]
+  note: Confirmed via live OPTIONS/GET; public PRD is browser-callable.

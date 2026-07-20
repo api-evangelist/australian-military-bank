@@ -1,0 +1,34 @@
+generated: '2026-07-20'
+method: searched
+source: https://consumerdatastandardsaustralia.github.io/standards/#versioning
+docs: https://www.australianmilitarybank.com.au/consumer-data-right
+versioning:
+  scheme: header-negotiated
+  request_header: x-v
+  min_request_header: x-min-v
+  current:
+    products_list: 5
+    products_detail: 5
+  served_live: 3
+  detail: >-
+    CDR endpoints are versioned per-operation and negotiated via the x-v
+    request header. The spec advertises x-version 5 for the products
+    operations; the live public endpoint currently serves x-v 3.
+deprecation:
+  policy: cdr-standards-versioning
+  mechanism: >-
+    Superseded endpoint versions are marked obsolete in the Data Standards and
+    remain callable via the x-v header for a defined transition window. The
+    OpenAPI links obsolete versions (e.g. get-accounts v1/v2) inline.
+  policy_url: https://consumerdatastandardsaustralia.github.io/standards/#versioning
+  sunset_header: false
+sla:
+  regime: >-
+    CDR data holders are bound by the Consumer Data Standards non-functional
+    requirements (availability and performance targets) and CDR Register
+    service-management obligations.
+status_page: null
+deprecated_operations: []
+notes: >-
+  No separate provider-published status page or bespoke deprecation policy was
+  found; lifecycle is governed entirely by the DSB Consumer Data Standards.

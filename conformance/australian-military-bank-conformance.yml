@@ -1,0 +1,53 @@
+generated: '2026-07-20'
+method: searched
+source: https://consumerdatastandardsaustralia.github.io/standards/
+docs: https://www.australianmilitarybank.com.au/consumer-data-right
+description: >-
+  Cross-cutting standards conformance for Australian Military Bank's CDR
+  Product Reference Data API. As a registered ADI and CDR data holder, the bank
+  implements the Data Standards Body Consumer Data Standards; the public PRD
+  surface is verified live, the authenticated CDR profile is asserted from the
+  regime it participates in.
+standards:
+  - id: cdr-consumer-data-standards
+    conforms: true
+    evidence: >-
+      OpenAPI is the DSB CDR Banking API v1.36.0; live PRD endpoint returns
+      x-v 3 conformant payloads at public.open.australianmilitarybank.com.au.
+  - id: cdr-product-reference-data
+    conforms: true
+    evidence: GET /banking/products + GET /banking/products/{productId} live, unauthenticated.
+  - id: oauth2
+    conforms: true
+    scope: authenticated-cdr-surface
+    evidence: CDR data-holder consumer-data flows use OAuth2 authorization code.
+  - id: oidc
+    conforms: true
+    scope: authenticated-cdr-surface
+    evidence: CDR security profile is OpenID Connect based.
+  - id: fapi
+    conforms: true
+    scope: authenticated-cdr-surface
+    evidence: >-
+      CDR mandates the AU adaptation of FAPI (PAR, mTLS-bound tokens,
+      x-fapi-* headers present throughout the spec).
+  - id: mutual-tls
+    conforms: true
+    scope: authenticated-cdr-surface
+    evidence: Spec servers include an MTLS base; CDR tokens are mTLS sender-constrained.
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: >-
+      Uses the CDS ResponseErrorListV2 error envelope (code/title/detail/meta),
+      not application/problem+json.
+  - id: pagination
+    conforms: true
+    evidence: page/page-size with meta.totalRecords/totalPages and links object.
+  - id: idempotency
+    conforms: false
+    evidence: Read-only public surface; no idempotency-key contract.
+compliance_program:
+  regime: Australian Consumer Data Right (CDR)
+  regulators: [ACCC, OAIC]
+  role: Data Holder (registered ADI)
+  reference: https://www.australianmilitarybank.com.au/consumer-data-right
