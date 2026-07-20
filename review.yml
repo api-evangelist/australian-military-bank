@@ -1,0 +1,86 @@
+aid: australian-military-bank
+name: Australian Military Bank
+review:
+  question: Does Australian Military Bank expose a confirmed public API surface, and
+    is its only proprietary contract or the shared CDR standard?
+  answer: true
+  date: '2026-07-20'
+  reviewer: API Evangelist
+  cdrPrdConfirmed: true
+  specProvenance: cds-standard
+findings:
+  summary: |
+    Australian Military Bank is a customer-owned mutual ADI (ABN 48 087 649 741,
+    AFSL/ACL 237988) whose only public, unauthenticated API is the Consumer Data
+    Right (CDR) Product Reference Data (PRD) API mandated for active ADIs. The
+    live endpoint was confirmed by direct fetch:
+    GET https://public.open.australianmilitarybank.com.au/cds-au/v1/banking/products
+    returned HTTP 200 with content-type application/json, response header x-v: 3,
+    and a data.products array (25 products on page one; meta.totalRecords 39 across
+    2 pages). The public base URI was resolved from the official ACCC/Treasury CDR
+    Register data-holder brands summary (dataHolderBrandId
+    2ee9e2a8-1c98-eb11-a821-000d3a884a20, publicBaseUri
+    https://public.open.australianmilitarybank.com.au). Common bank-host patterns
+    (api./cdr./openbank.australianmilitarybank.com.au) did NOT resolve; the CDR
+    surface is served from the dedicated public.open. host.
+
+    The bank does NOT run a broader self-serve developer portal, sandbox, or a
+    proprietary personal-banking API (unlike Up). Its developer-facing surface is
+    the Consumer Data Right information page
+    (https://www.australianmilitarybank.com.au/consumer-data-right). No public
+    GitHub organisation exists (github.com/australianmilitarybank returns 404).
+
+    Auth model: the PRD API is fully public/unauthenticated by CDR design. All
+    consumer data sharing beyond product reference data (accounts, balances,
+    transactions, payees, direct debits, scheduled/direct payments) is available
+    only to accredited data recipients (ADRs) via the CDR's FAPI-profiled
+    OAuth2/OpenID Connect authorization flows with PAR, mTLS, and private_key_jwt
+    client authentication — not exposed to the general public.
+
+    Spec provenance: the harvested OpenAPI is the SHARED DSB Consumer Data
+    Standards "CDR Banking API" (OpenAPI 3.0.3, version 1.36.0), fetched verbatim
+    from consumerdatastandardsaustralia.github.io and converted JSON->YAML. It is
+    the ecosystem-wide standard that AMB's PRD endpoints conform to, NOT a
+    bank-authored/proprietary contract. Australian Military Bank does not publish
+    its own OpenAPI/Swagger.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://public.open.australianmilitarybank.com.au/cds-au/v1
+      documented: true
+      note: Public unauthenticated CDR Product Reference Data endpoints; confirmed HTTP 200 with x-v 3.
+    - protocol: REST
+      scheme: https
+      documented: true
+      note: >-
+        Authenticated CDR consumer-data-sharing endpoints (accounts, transactions, etc.) require an
+        accredited data recipient and FAPI OAuth2/OIDC authorization; not public. Authenticated base
+        URI not captured (register infosec base not fetched in this bootstrap).
+  endpointsConfirmedRest:
+    - GET https://public.open.australianmilitarybank.com.au/cds-au/v1/banking/products
+    - GET https://public.open.australianmilitarybank.com.au/cds-au/v1/banking/products/{productId}
+sources:
+  - url: https://api.cdr.gov.au/cdr-register/v1/banking/data-holders/brands/summary
+    type: APIReference
+    note: >-
+      Official CDR Register data-holder brands summary (HTTP 200). Resolved Australian Military Bank
+      publicBaseUri https://public.open.australianmilitarybank.com.au (brandId
+      2ee9e2a8-1c98-eb11-a821-000d3a884a20, lastUpdated 2026-07-01).
+  - url: https://public.open.australianmilitarybank.com.au/cds-au/v1/banking/products
+    type: APIReference
+    note: Live PRD endpoint. Direct fetch returned HTTP 200, application/json, x-v 3, 39 products / 2 pages.
+  - url: https://www.australianmilitarybank.com.au/consumer-data-right
+    type: Documentation
+    note: Bank's Consumer Data Right / open banking information page (HTTP 200). No sandbox or dev portal beyond this.
+  - url: https://consumerdatastandardsaustralia.github.io/standards/includes/swagger/cds_banking.json
+    type: OpenAPI
+    note: >-
+      DSB Consumer Data Standards CDR Banking API swagger (OpenAPI 3.0.3, v1.36.0), harvested verbatim
+      and converted to YAML. Shared ecosystem standard, not bank-proprietary.
+actions:
+  openapiPath: openapi/australian-military-bank-cds-banking-products-openapi.yml
+  openapiProvenance: >-
+    DSB Consumer Data Standards CDR Banking API v1.36.0 (OpenAPI 3.0.3), shared standard covering all
+    CDR banking endpoints, of which the public PRD subset is GET /banking/products and
+    GET /banking/products/{productId}. Not authored by Australian Military Bank.
+  apisYmlUpdated: true

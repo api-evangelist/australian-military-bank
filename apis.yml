@@ -1,0 +1,71 @@
+aid: australian-military-bank
+url: https://raw.githubusercontent.com/api-evangelist/australian-military-bank/refs/heads/main/apis.yml
+name: Australian Military Bank
+kind: company
+description: Australian Military Bank Ltd (ABN 48 087 649 741, AFSL/Australian Credit
+  Licence 237988, BSB 642170) is a customer-owned mutual authorised deposit-taking
+  institution (ADI) that has served the Australian Defence Force community, veterans,
+  and their families since 1959, making it one of Australia's longest-serving Defence
+  financial institutions. As an active ADI it participates in Australia's Consumer
+  Data Right (CDR) open banking regime, and its only public, unauthenticated API surface
+  is the mandated Product Reference Data (PRD) API built to the Data Standards Body
+  (DSB) Consumer Data Standards. Consumer data sharing (accounts, balances, transactions)
+  is available only to accredited data recipients through the CDR's authenticated,
+  FAPI-profiled OAuth2/OIDC flows; the bank does not publish a broader self-serve
+  developer portal or proprietary API program.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Financial
+- Banks
+- Open Banking
+- CDR
+- Consumer Banking
+- Australia
+- Mutual
+- Defence
+created: '2026-07-20'
+modified: '2026-07-20'
+specificationVersion: '0.19'
+apis:
+- aid: australian-military-bank:australian-military-bank-cdr-product-reference-data-api
+  name: Australian Military Bank CDR Product Reference Data API
+  tags:
+  - CDR
+  - Open Banking
+  - Product Reference Data
+  - Banking Products
+  - Public
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.australianmilitarybank.com.au/consumer-data-right
+  baseURL: https://public.open.australianmilitarybank.com.au/cds-au/v1
+  properties:
+  - url: https://www.australianmilitarybank.com.au/consumer-data-right
+    type: Documentation
+  - url: https://consumerdatastandardsaustralia.github.io/standards/#get-products
+    type: APIReference
+  - url: openapi/australian-military-bank-cds-banking-products-openapi.yml
+    type: OpenAPI
+  description: Public, unauthenticated Consumer Data Right (CDR) Product Reference
+    Data API exposing Australian Military Bank's retail banking product catalogue.
+    Confirmed live at https://public.open.australianmilitarybank.com.au/cds-au/v1/banking/products
+    (HTTP 200, x-v 3, 39 products across 2 pages). Conforms to the DSB Consumer Data
+    Standards Banking API; provides GET /banking/products (list, filterable/paginated)
+    and GET /banking/products/{productId} (product detail) with no authentication.
+common:
+- type: Website
+  url: https://www.australianmilitarybank.com.au/
+- type: DeveloperPortal
+  url: https://www.australianmilitarybank.com.au/consumer-data-right
+- type: LinkedIn
+  url: https://www.linkedin.com/company/australian-military-bank
+- type: TermsOfService
+  url: https://www.australianmilitarybank.com.au/disclosuredocuments
+- type: PrivacyPolicy
+  url: https://www.australianmilitarybank.com.au/privacy
+- type: Security
+  url: https://www.australianmilitarybank.com.au/securityhub
+- type: Support
+  url: https://www.australianmilitarybank.com.au/contact
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
