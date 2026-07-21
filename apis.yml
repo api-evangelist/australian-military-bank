@@ -24,7 +24,7 @@ tags:
 - Mutual
 - Defence
 created: '2026-07-20'
-modified: '2026-07-20'
+modified: '2026-07-21'
 specificationVersion: '0.19'
 apis:
 - aid: australian-military-bank:australian-military-bank-cdr-product-reference-data-api
@@ -37,7 +37,7 @@ apis:
   - Public
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://www.australianmilitarybank.com.au/consumer-data-right
-  baseURL: https://public.open.australianmilitarybank.com.au/cds-au/v1
+  baseURL: https://public.open.australianmilitarybank.com.au/cds-au/v1/banking/products
   properties:
   - url: https://www.australianmilitarybank.com.au/consumer-data-right
     type: Documentation
@@ -48,9 +48,115 @@ apis:
   description: Public, unauthenticated Consumer Data Right (CDR) Product Reference
     Data API exposing Australian Military Bank's retail banking product catalogue.
     Confirmed live at https://public.open.australianmilitarybank.com.au/cds-au/v1/banking/products
-    (HTTP 200, x-v 3, 39 products across 2 pages). Conforms to the DSB Consumer Data
-    Standards Banking API; provides GET /banking/products (list, filterable/paginated)
-    and GET /banking/products/{productId} (product detail) with no authentication.
+    (HTTP 200, x-v 3). Conforms to the DSB Consumer Data
+    Standards Banking API (v1.36.0); provides GET /banking/products (list, filterable/paginated)
+    and GET /banking/products/{productId} (product detail) with no authentication required.
+- aid: australian-military-bank:australian-military-bank-cdr-accounts-balances-api
+  name: Australian Military Bank CDR Accounts & Balances API
+  tags:
+  - CDR
+  - Open Banking
+  - Accounts
+  - Balances
+  - Consumer Authorized
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.australianmilitarybank.com.au/consumer-data-right
+  baseURL: https://public.open.australianmilitarybank.com.au/cds-au/v1/banking/accounts
+  properties:
+  - url: https://www.australianmilitarybank.com.au/consumer-data-right
+    type: Documentation
+  - url: https://consumerdatastandardsaustralia.github.io/standards/#get-accounts
+    type: APIReference
+  - url: openapi/australian-military-bank-cds-banking-products-openapi.yml
+    type: OpenAPI
+  description: Consumer-authorized Consumer Data Right (CDR) Accounts and Balances
+    API. Part of the DSB Consumer Data Standards Banking API (v1.36.0) that Australian
+    Military Bank is legally required to implement as an accredited data holder.
+    Provides GET /banking/accounts (list accounts), GET /banking/accounts/balances
+    (bulk balances), GET /banking/accounts/{accountId}/balance (single balance) and
+    GET /banking/accounts/{accountId} (account detail). Unlike the public Product
+    Reference Data endpoint, these endpoints return authenticated customer data and
+    are only accessible to accredited data recipients (ADRs) through the CDR's
+    FAPI-profiled OAuth2/OIDC consent flows over mutual-TLS.
+- aid: australian-military-bank:australian-military-bank-cdr-transactions-api
+  name: Australian Military Bank CDR Transactions API
+  tags:
+  - CDR
+  - Open Banking
+  - Transactions
+  - Consumer Authorized
+  - Banking
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.australianmilitarybank.com.au/consumer-data-right
+  baseURL: https://public.open.australianmilitarybank.com.au/cds-au/v1/banking/accounts
+  properties:
+  - url: https://www.australianmilitarybank.com.au/consumer-data-right
+    type: Documentation
+  - url: https://consumerdatastandardsaustralia.github.io/standards/#get-transactions-for-account
+    type: APIReference
+  - url: openapi/australian-military-bank-cds-banking-products-openapi.yml
+    type: OpenAPI
+  description: Consumer-authorized Consumer Data Right (CDR) Transactions API. Part
+    of the DSB Consumer Data Standards Banking API (v1.36.0) mandated for Australian
+    Military Bank as an accredited data holder. Provides GET
+    /banking/accounts/{accountId}/transactions (list transactions for an account,
+    with date/amount/text filters and pagination) and GET
+    /banking/accounts/{accountId}/transactions/{transactionId} (transaction detail).
+    These return authenticated customer transaction data and are only accessible to
+    accredited data recipients (ADRs) via the CDR's FAPI-profiled OAuth2/OIDC consent
+    flows over mutual-TLS; they are not part of the public unauthenticated surface.
+- aid: australian-military-bank:australian-military-bank-cdr-direct-debits-scheduled-payments-api
+  name: Australian Military Bank CDR Direct Debits & Scheduled Payments API
+  tags:
+  - CDR
+  - Open Banking
+  - Direct Debits
+  - Scheduled Payments
+  - Consumer Authorized
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.australianmilitarybank.com.au/consumer-data-right
+  baseURL: https://public.open.australianmilitarybank.com.au/cds-au/v1/banking/accounts
+  properties:
+  - url: https://www.australianmilitarybank.com.au/consumer-data-right
+    type: Documentation
+  - url: https://consumerdatastandardsaustralia.github.io/standards/#get-direct-debits-for-account
+    type: APIReference
+  - url: openapi/australian-military-bank-cds-banking-products-openapi.yml
+    type: OpenAPI
+  description: Consumer-authorized Consumer Data Right (CDR) Direct Debits and
+    Scheduled Payments API. Part of the DSB Consumer Data Standards Banking API
+    (v1.36.0) mandated for Australian Military Bank as an accredited data holder.
+    Provides GET /banking/accounts/{accountId}/direct-debits and GET
+    /banking/accounts/direct-debits (authorised direct debits), plus GET
+    /banking/accounts/{accountId}/payments/scheduled and GET
+    /banking/payments/scheduled (scheduled payments). These return authenticated
+    customer data and are only accessible to accredited data recipients (ADRs)
+    through the CDR's FAPI-profiled OAuth2/OIDC consent flows over mutual-TLS.
+- aid: australian-military-bank:australian-military-bank-cdr-payees-api
+  name: Australian Military Bank CDR Payees API
+  tags:
+  - CDR
+  - Open Banking
+  - Payees
+  - Consumer Authorized
+  - Banking
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://www.australianmilitarybank.com.au/consumer-data-right
+  baseURL: https://public.open.australianmilitarybank.com.au/cds-au/v1/banking/payees
+  properties:
+  - url: https://www.australianmilitarybank.com.au/consumer-data-right
+    type: Documentation
+  - url: https://consumerdatastandardsaustralia.github.io/standards/#get-payees
+    type: APIReference
+  - url: openapi/australian-military-bank-cds-banking-products-openapi.yml
+    type: OpenAPI
+  description: Consumer-authorized Consumer Data Right (CDR) Payees API. Part of the
+    DSB Consumer Data Standards Banking API (v1.36.0) mandated for Australian
+    Military Bank as an accredited data holder. Provides GET /banking/payees (list
+    saved payees) and GET /banking/payees/{payeeId} (payee detail). These return
+    authenticated customer data and are only accessible to accredited data recipients
+    (ADRs) through the CDR's FAPI-profiled OAuth2/OIDC consent flows over mutual-TLS;
+    they are not part of the public unauthenticated Product Reference Data surface.
 common:
 - type: DomainSecurity
   url: security/australian-military-bank-domain-security.yml

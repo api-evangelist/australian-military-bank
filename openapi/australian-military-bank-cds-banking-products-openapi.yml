@@ -10,6 +10,12 @@ info:
     url: https://opensource.org/licenses/MIT
   title: CDR Banking API
   version: 1.36.0
+  x-provenance: Shared Data Standards Body (DSB) Consumer Data Standards "CDR Banking
+    API" (v1.36.0), harvested verbatim from consumerdatastandardsaustralia.github.io/standards.
+    This is the standardized industry surface every Australian ADI (including Australian
+    Military Bank) implements, not a bank-proprietary specification. Only GET /banking/products
+    and GET /banking/products/{productId} are public/unauthenticated; all other paths
+    require CDR consumer authorization (accredited data recipient, FAPI OAuth2/OIDC over mTLS).
 servers:
 - description: MTLS
   url: https://mtls.dh.example.com/cds-au/v1
