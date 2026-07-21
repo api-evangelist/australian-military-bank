@@ -1,0 +1,61 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/australian-military-bank-cds-banking-products-openapi.yml
+docs: https://consumerdatastandardsaustralia.github.io/standards/#security-profile
+description: >-
+  OAuth2 authorization scopes for the consumer-authorized surface of Australian
+  Military Bank's CDR (Consumer Data Right) Banking API. The bank declares no
+  formal OpenAPI securitySchemes; scopes are published per-operation as `x-scopes`
+  extensions in the Data Standards Body CDR Banking API (v1.36.0) that the bank
+  implements as a registered ADI / CDR data holder. These scopes are granted only
+  to CDR-accredited data recipients (ADRs) through the FAPI-profiled OAuth2/OIDC
+  consent flow over mutual-TLS; the public Product Reference Data endpoints
+  (listBankingProducts, getBankingProductDetail) require no scope and no auth.
+flow: authorization_code
+token_binding: mutualTLS
+profile: FAPI 2.0 (AU-CDR)
+scopes:
+  - name: bank:accounts.basic:read
+    description: Read basic account information (account list and balances).
+    operations:
+      - listBankingAccounts
+      - listBankingBalancesBulk
+      - listBankingBalancesSpecificAccounts
+      - getBankingBalance
+  - name: bank:accounts.detail:read
+    description: Read detailed account information including account numbers and features.
+    operations:
+      - getBankingAccountDetail
+  - name: bank:transactions:read
+    description: Read transactions for authorized accounts.
+    operations:
+      - listBankingTransactions
+      - getBankingTransactionDetail
+  - name: bank:regular_payments:read
+    description: Read direct debits, scheduled payments, and instalment plans.
+    operations:
+      - listDirectDebits
+      - listDirectDebitsBulk
+      - listDirectDebitsSpecificAccounts
+      - listScheduledPayments
+      - listScheduledPaymentsBulk
+      - listScheduledPaymentsSpecificAccounts
+      - listInstalmentPlans
+      - listInstalmentPlansBulk
+  - name: bank:payees:read
+    description: Read saved payees.
+    operations:
+      - listBankingPayees
+      - getBankingPayeeDetail
+  - name: common:customer.basic:read
+    description: >-
+      Read basic customer identity information. Declared in the CDR common
+      standards for the customer endpoints; not present as an x-scopes value on
+      the banking paths in this spec but required in the CDR consent for
+      customer data.
+    operations: []
+notes: >-
+  The public unauthenticated Product Reference Data surface (GET /banking/products
+  and GET /banking/products/{productId}) requires no OAuth scope. All scoped
+  operations are only exercisable by accredited data recipients registered with
+  the CDR Register; they are not callable from this public repo.

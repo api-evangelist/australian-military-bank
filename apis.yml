@@ -178,6 +178,8 @@ common:
   url: https://consumerdatastandardsaustralia.github.io/standards/#get-products
 - type: Authentication
   url: authentication/australian-military-bank-authentication.yml
+- type: OAuthScopes
+  url: scopes/australian-military-bank-scopes.yml
 - type: Conventions
   url: conventions/australian-military-bank-conventions.yml
 - type: ErrorCatalog
