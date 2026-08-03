@@ -1,0 +1,26 @@
+{
+  "provider": "australian-military-bank",
+  "sources": [
+    "australian-military-bank-banking-account-balances-api-openapi.yml",
+    "australian-military-bank-banking-account-direct-debits-api-openapi.yml",
+    "australian-military-bank-banking-account-scheduled-payments-api-openapi.yml",
+    "australian-military-bank-banking-account-transactions-api-openapi.yml",
+    "australian-military-bank-banking-accounts-api-openapi.yml",
+    "australian-military-bank-banking-payees-api-openapi.yml",
+    "australian-military-bank-banking-products-api-openapi.yml"
+  ],
+  "outputs": [
+    "australian-military-bank-banking-account-balances-api-openapi.yml",
+    "australian-military-bank-banking-account-direct-debits-api-openapi.yml",
+    "australian-military-bank-banking-account-scheduled-payments-api-openapi.yml",
+    "australian-military-bank-banking-account-transactions-api-openapi.yml",
+    "australian-military-bank-banking-accounts-api-openapi.yml",
+    "australian-military-bank-banking-payees-api-openapi.yml",
+    "australian-military-bank-banking-products-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
