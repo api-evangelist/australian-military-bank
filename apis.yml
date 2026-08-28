@@ -13,6 +13,18 @@ description: Australian Military Bank Ltd (ABN 48 087 649 741, AFSL/Australian C
   is available only to accredited data recipients through the CDR's authenticated,
   FAPI-profiled OAuth2/OIDC flows; the bank does not publish a broader self-serve
   developer portal or proprietary API program.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
