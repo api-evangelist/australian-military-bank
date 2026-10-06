@@ -60,7 +60,7 @@ tags_raw:
 - Mutual
 - Defence
 created: '2026-07-20'
-modified: '2026-07-21'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 apis:
 - aid: australian-military-bank:australian-military-bank-banking-account-balances-api
@@ -225,6 +225,8 @@ apis:
   - type: APIReference
     url: https://consumerdatastandardsaustralia.github.io/standards/#get-payees
 common:
+- url: https://australianmilitarybank.com.au/blog/
+  type: Blog
 - type: DomainSecurity
   url: security/australian-military-bank-domain-security.yml
 - type: Website
